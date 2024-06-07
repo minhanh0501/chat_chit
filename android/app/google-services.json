@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1039011953504",
+    "project_id": "chatchit-73bd9",
+    "storage_bucket": "chatchit-73bd9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1039011953504:android:d95fa63adba5ead9b53c05",
+        "android_client_info": {
+          "package_name": "com.example.chat_chit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5UMmT-8KJUtn4vyOvJ5gwlOugRFA-cOk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
