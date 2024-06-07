@@ -18,7 +18,6 @@ class LoginPage extends StatelessWidget {
   // Login method
   void login(BuildContext context) async {
     final auth = AuthService();
-
     try {
       await auth.signIn(
         _emailController.text,
@@ -28,8 +27,8 @@ class LoginPage extends StatelessWidget {
       // ignore: use_build_context_synchronously
       showDialog(
         context: context,
-        builder: (context) => const AlertDialog(
-          title: Text("incorrect username or password"),
+        builder: (context) => AlertDialog(
+          title: Text(e.toString()),
         ),
       );
     }

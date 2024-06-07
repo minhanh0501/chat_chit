@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../components/chat_card.dart';
+import '../components/user_card.dart';
 import '../services/auth/auth_service.dart';
 import '../services/chat/chat_service.dart';
 import 'chat_page.dart';

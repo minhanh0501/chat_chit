@@ -50,14 +50,6 @@ class _ChatPageState extends State<ChatPage> {
     );
   }
 
-  @override
-  void dispose() {
-    // Khi widget bị huỷ, giải phóng các tài nguyên
-    focusNode.dispose();
-    _messageController.dispose();
-    super.dispose();
-  }
-
   // Scroll Controller
   final ScrollController _scrollController = ScrollController();
   void srcollDown() {
@@ -72,9 +64,9 @@ class _ChatPageState extends State<ChatPage> {
   // SendMess method
   void sendMess() async {
     if (_messageController.text.isNotEmpty) {
-      // Gửi tin nhắn
+      //gui tin nhan
       await _chatService.sendMess(widget.receiverID, _messageController.text);
-      // Xóa văn bản trong TextField sau khi gửi tin nhắn thành công
+      //xoa tin nhan trong o nhap khi gui thanh cong
       _messageController.clear();
     }
   }
@@ -125,15 +117,12 @@ class _ChatPageState extends State<ChatPage> {
     String senderID = _authService.getCurrentUser()!.uid;
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
-    // Lấy ID của document
+    // Lấy ID của document (mess)
     String messageID = doc.id;
-
     // Lấy ID của chat room
     String chatRoomID = _chatService.getChatRoomID(widget.receiverID, senderID);
-
     // Kiểm tra có phải là người nhắn không
     bool isCurrentUser = data['senderID'] == senderID;
-
     // Chuyển item tin nhắn căn phải nếu là người gửi, còn không phải thì căn trái
     var alignmentMessage =
         isCurrentUser ? Alignment.centerRight : Alignment.centerLeft;

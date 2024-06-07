@@ -26,19 +26,16 @@ class AuthService {
   // Sign up
   Future<UserCredential> signUp(String email, password) async {
     try {
-      // Tạo tài khoản
       UserCredential userCredential =
           await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-      // Lưu trữ thông tin tài khoản vào doc
       _firestore.collection("Users").doc(userCredential.user!.uid).set({
         'uid': userCredential.user!.uid,
         'email': email,
       });
-
       return userCredential;
     } on FirebaseAuthException catch (e) {
       throw Exception(e.code);

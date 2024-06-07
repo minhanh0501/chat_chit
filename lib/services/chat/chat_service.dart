@@ -11,8 +11,8 @@ class ChatService {
   // Lấy id chat room
   String getChatRoomID(String userID, String otherUserID) {
     List<String> idRoom = [userID, otherUserID];
-    idRoom.sort();
-    return idRoom.join('_');
+    idRoom.sort(); // sap xep vi co the 2 ng nhan se nhan 2 id khac nhau
+    return idRoom.join('_'); //noi id_room dang 'id01_id02'
   }
 
   // Phương thức lấy luồng dữ liệu về các người dùng từ Firestore
@@ -29,12 +29,11 @@ class ChatService {
 
   // Gửi tin nhắn (Create)
   Future<void> sendMess(String receiverID, message) async {
-    // Lấy thông tin người dùng hiện tại
     final String currentUserID = _firebaseAuth.currentUser!.uid;
     final String currentUserEmail = _firebaseAuth.currentUser!.email!;
     final Timestamp timestamp = Timestamp.now();
 
-    // Tạo 1 message mới
+//Create new mess
     Message newmessage = Message(
       senderID: currentUserID,
       senderEmail: currentUserEmail,
@@ -43,41 +42,39 @@ class ChatService {
       timestamp: timestamp,
     );
 
-    // Tạo 1 phòng có ID riêng cho 2 người dùng
+// Create room mix id 2 user
     List<String> idRoom = [currentUserID, receiverID];
-    idRoom.sort(); // Sắp xếp lại vì có thể 2 người sẽ nhận 2 id_room khác nhau
-    String chatRoomID = idRoom.join('_'); // Nối id_room dưới dạng 'id01_id02'
+    idRoom.sort(); // sap xep vi co the 2 ng nhan se nhan 2 id khac nhau
+    String chatRoomID = idRoom.join('_'); //noi id_room dang 'id01_id02'
 
-    // Thêm message mới vào database
     await _firestore
-        .collection("chat_rooms")
+        .collection('chat_rooms')
         .doc(chatRoomID)
-        .collection("messages")
+        .collection('messages')
         .add(newmessage.toMap());
   }
 
   // Lấy tin nhắn để hiển thị (Read)
   Stream<QuerySnapshot> getMess(String userID, otherUserID) {
-    // Tạo 1 phòng có ID riêng cho 2 người dùng
+    // Create room mix id 2 user
     List<String> idRoom = [userID, otherUserID];
-    idRoom.sort(); // Sắp xếp lại vì có thể 2 người sẽ nhận 2 id_room khác nhau
-    String chatRoomID = idRoom.join('_'); // Nối id_room dưới dạng 'id01_id02'
+    idRoom.sort(); // sap xep vi co the 2 ng nhan se nhan 2 id khac nhau
+    String chatRoomID = idRoom.join('_'); //noi id_room dang 'id01_id02'
 
     return _firestore
-        .collection("chat_rooms")
+        .collection('chat_rooms')
         .doc(chatRoomID)
-        .collection("messages")
-        .orderBy("timestamp",
-            descending: false) // Sắp xếp thứ tự tin nhắn theo time
+        .collection('messages')
+        .orderBy("timestamp", descending: false)
         .snapshots();
   }
 
   // Sửa tin nhắn (Edit)
   Future<void> editMess(String chatRoomID, messageID, newMessage) async {
     await _firestore
-        .collection("chat_rooms")
+        .collection('chat_rooms')
         .doc(chatRoomID)
-        .collection("messages")
+        .collection('messages')
         .doc(messageID)
         .update({
       "message": newMessage,
@@ -87,9 +84,9 @@ class ChatService {
   // Xóa tin nhắn (Delete)
   Future<void> deleteMess(String chatRoomID, messageID) async {
     await _firestore
-        .collection("chat_rooms")
+        .collection('chat_rooms')
         .doc(chatRoomID)
-        .collection("messages")
+        .collection('messages')
         .doc(messageID)
         .delete();
   }

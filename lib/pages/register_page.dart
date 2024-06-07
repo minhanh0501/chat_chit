@@ -16,8 +16,7 @@ class RegisterPage extends StatelessWidget {
   // Register method
   void register(BuildContext context) async {
     final auth = AuthService();
-
-    if (_pwController.text == _comfirmpwController.text) {
+    if (_comfirmpwController.text == _pwController.text) {
       try {
         await auth.signUp(
           _emailController.text,
@@ -36,7 +35,7 @@ class RegisterPage extends StatelessWidget {
       showDialog(
         context: context,
         builder: (context) => const AlertDialog(
-          title: Text("Passwords don't match !!!"),
+          title: Text("Password don't match!!!"),
         ),
       );
     }
@@ -99,7 +98,7 @@ class RegisterPage extends StatelessWidget {
 
               const SizedBox(height: 25),
 
-              // Nút login
+              // Nút dang ky
               Buttom_Edit(
                 text: 'Register',
                 onTap: () => register(context),
