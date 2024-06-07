@@ -1,6 +1,6 @@
 # chat_chit
 
-Welcome to the Barber App! This Flutter application allows users to chat with friends.
+Welcome to the Chat Chit App! This Flutter application allows users to chat with friends.
 
 
 ## Getting Started
